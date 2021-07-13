@@ -1,0 +1,48 @@
+[web_server]
+host = '0.0.0.0'
+port = 8080
+worker_pool = 10
+templates = "public/**/*"
+[web_server.tls]
+cert = "etc/tls/certs/api_server.crt.pem"
+key = "etc/tls/private/api_server.key.pem"
+cacert = ""
+
+[redis_sessions]
+name = "session"
+host = '0.0.0.0'
+port = 6379
+secure = true
+ttl = 308658
+private_key = "01E6XDP8038T2FVZC1H0SM8BGQ01E6XCXVM5BJ722ZR50KN19PVR"
+
+[prometheus]
+endpoint = "/metrics"
+metrics = "counter"
+description = "api endpoint counter"
+
+[cookie]
+name = 'actix_session'
+secret = '01E6XDP8038T2FVZC1H0SM8BGQ01E6XCXVM5BJ722ZR50KN19PVR'
+age = 308658
+secure = false
+
+[rabbit_mq]
+user = "someuser"
+password = "supersecurepass3"
+host = "localhost"
+port = "5672"
+exchange = "service"
+queue = "api_service"
+consumer = "api_service"
+prefetch = 20
+
+[psql]
+# connection_string = "postgres://postgres:admin@0.0.0.0:5432/testing?sslmode=disable"
+url = "postgres://{}:{}@{}:{}/{}?sslmode={}"
+user = "postgres"
+password = "admin"
+host = "0.0.0.0"
+port = "5432"
+database = "testing"
+sslmode = "disable"
